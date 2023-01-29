@@ -1,0 +1,11 @@
+.square {
+  width: 100px;
+  height: 100px;
+  background: #1E3640;
+  box-shadow: 0px 5px #15252c;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 48px;
+}

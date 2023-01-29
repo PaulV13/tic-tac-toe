@@ -1,0 +1,76 @@
+.container_winner {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(5, 25, 32, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner {
+  position: relative;
+  width: 30%;
+  height: 200px;
+  background: #345d6e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  padding: 16px;
+}
+
+.winner section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner footer {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winner button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.winner button:hover {
+  transform: translateY(-2px);
+}
+
+.winner_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.winner_text h1{
+  margin: 4px;
+}
+
+.return_btn {
+  background: #F3B136;
+  box-shadow: 0px 4px #b68529;
+}
+
+.quit_btn {
+  background: #cacaca;
+  box-shadow: 0px 4px #4d4c4c;
+  margin-right: 16px;
+}
+
