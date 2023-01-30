@@ -6,7 +6,7 @@ export function WinnerModal({ winner, resetGame, quitGame }) {
 		<div className='container_winner'>
 			<section className='winner'>
 				{winner === false ? (
-					<h2>Empate</h2>
+					<h2>TIE</h2>
 				) : (
 					<div className='winner_text'>
 						<h1>{winner.name}</h1>
