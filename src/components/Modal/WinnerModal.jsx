@@ -13,10 +13,13 @@ export function WinnerModal({ winner, resetGame, quitGame }) {
 						<h1>WON!</h1>
 					</div>
 				)}
-				<section>
-					{winner && <img src={winner.icon}></img>}
-					<h1>TAKES THE ROUND</h1>
-				</section>
+				{winner && (
+					<section>
+						<img src={winner.icon}></img>
+						<h1>TAKES THE ROUND</h1>
+					</section>
+				)}
+
 				<footer>
 					<button className='quit_btn' onClick={quitGame}>
 						QUIT
