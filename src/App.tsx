@@ -32,7 +32,7 @@ function App() {
 	const { scoreX, scoreO, scoreTies, resetScore } = useUpdateScore(winner);
 
 	useEffect(() => {
-		if (player2.icon !== '' && player2.name === "CPU") {
+		if (player2.name === "CPU" && player2.icon === turn.icon) {
 			const index = array[Math.floor(Math.random() * array.length)];
 			const newArray = array.filter(i => i !== index);
 			setArray(newArray);
@@ -42,9 +42,7 @@ function App() {
 
 	const updateBoard = (index: number) => {
 
-		if (board[index].icon !== '' || winner.icon != '') return;
-
-		if (winner.icon !== '') return;
+		if (winner.name !== '' || board[index].name !== '') return;
 
 		const newArray = array.filter(i => i !== index);
 		setArray(newArray);
@@ -53,11 +51,9 @@ function App() {
 		newBoard[index] = turn;
 		setBoard(newBoard);
 
-		if (winner.icon === '') {
-			if (player2.icon !== '') {
-				const newTurn = turn.icon === player.icon ? player2 : player;
-				setTurn(newTurn);
-			}
+		if (winner.name === '') {
+			const newTurn = turn.icon === player.icon ? player2 : player;
+			setTurn(newTurn);
 		}
 
 		const newWinner = checkWinner(newBoard);
