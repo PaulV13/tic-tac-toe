@@ -28,7 +28,7 @@ function Score({ player1, player2, scoreTies, scoreX, scoreO }: Props) {
 			<div className='score-player2'>
 				<span>
 					<img src={player2.icon} />
-					{player2.name === 'CPU' ? 'CPU' : 'Player2'}
+					{player2.name === 'CPU' ? '(CPU)' : '(PLAYER 2)'}
 				</span>
 				<div className='score_value'>
 					{player2.icon === TURNS.X ? scoreX : scoreO}
