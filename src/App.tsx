@@ -147,7 +147,7 @@ function App() {
 	return (
 		<div className='App'>
 			{play === false ? (
-				<div>
+				<>
 					<div className='container_icons'>
 						<img src={TURNS.X} />
 						<img src={TURNS.O} />
@@ -178,7 +178,7 @@ function App() {
 							NEW GAME (VS PLAYER 2)
 						</button>
 					</div>
-				</div>
+				</>
 			) : (
 				<>
 					<Board

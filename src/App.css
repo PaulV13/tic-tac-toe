@@ -7,6 +7,7 @@ root, body, html {
   justify-content: center;
   align-items: center;
   font-family: 'Roboto';
+  margin: 0;
 }
 
 .container_icons img{
