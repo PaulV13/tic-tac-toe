@@ -1,10 +1,17 @@
 import { TURNS } from '../../constants';
 import { Square } from '../Square/Square';
 import iconReturn from '../../assets/return_icon.png';
-
+import { Player } from '../../../types';
 import './Board.css';
 
-function Board({ turn, board, updateBoard, resetGame }) {
+interface Props {
+	turn: Player
+	board: Player[]
+	updateBoard: (index: number) => void
+	resetGame: () => void
+}
+
+function Board({ turn, board, updateBoard, resetGame }: Props) {
 	return (
 		<div className='container_board'>
 			<section className='title'>
@@ -23,7 +30,7 @@ function Board({ turn, board, updateBoard, resetGame }) {
 				</div>
 			</section>
 			<div className='wrapper'>
-				{board.map((_, index) => (
+				{board.map((_, index: number) => (
 					<Square key={index} index={index} updateBoard={updateBoard}>
 						{board[index]}
 					</Square>

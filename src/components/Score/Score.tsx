@@ -1,7 +1,16 @@
-import { TURNS } from '../../constants.js';
+import { TURNS } from '../../constants';
+import { Player } from '../../../types';
 import './Score.css';
 
-function Score({ player1, player2, scoreTies, scoreX, scoreO }) {
+interface Props {
+	player1: Player
+	player2: Player
+	scoreTies: number
+	scoreX: number
+	scoreO: number
+}
+
+function Score({ player1, player2, scoreTies, scoreX, scoreO }: Props) {
 	return (
 		<section className='score_container'>
 			<div className='score-you'>

@@ -17,12 +17,10 @@ module.exports = {
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
+			tsx: true,
 		},
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
 	plugins: ['react'],
-	rules: {
-		'react/prop-types': 0,
-	},
 };

@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { TURNS } from '../constants.js';
+import { TURNS } from '../constants';
+import { Player } from '../../types';
 
-function useUpdateScore(winner) {
+function useUpdateScore(winner: Player) {
 	const [scoreTies, setScoreTies] = useState(0);
 	const [scoreX, setScoreX] = useState(0);
 	const [scoreO, setScoreO] = useState(0);
 
 	useEffect(() => {
-		if (winner && winner.icon === TURNS.X) {
+		if (winner.icon !== '' && winner.icon === TURNS.X) {
 			setScoreX(prevScore => prevScore + 1);
-		} else if (winner && winner.icon === TURNS.O) {
+		} else if (winner.icon !== '' && winner.icon === TURNS.O) {
 			setScoreO(prevScore => prevScore + 1);
-		} else if (winner === false) {
+		} else if (winner.name === 'Empate') {
 			setScoreTies(scoreTies => scoreTies + 1);
 		}
 	}, [winner]);

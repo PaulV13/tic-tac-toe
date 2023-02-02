@@ -1,6 +1,14 @@
+import { Player } from '../../../types';
 import './Square.css';
 
-export const Square = ({ children, updateBoard, index }) => {
+interface Props {
+	children: Player
+	updateBoard: (index:number) => void
+	index: number
+}
+
+export const Square = ({ children, updateBoard, index }: Props) => {
+
 	const handleclick = () => {
 		updateBoard(index);
 	};

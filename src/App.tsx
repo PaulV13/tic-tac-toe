@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react';
-import { TURNS } from './constants.js';
-import { checkWinner, checkEndGame } from './board.js';
+import { TURNS } from './constants';
+import { checkWinner, checkEndGame } from './board';
 import { WinnerModal } from './components/Modal/WinnerModal';
-import Score from './components/Score/Score.jsx';
-import Board from './components/Board/Board.jsx';
-import useUpdatePlayer from './hooks/useUpdatePlayer.js';
-import useUpdateScore from './hooks/useUpdateScore.js';
+import Score from './components/Score/Score';
+import Board from './components/Board/Board';
+import useUpdatePlayer from './hooks/useUpdatePlayer';
+import useUpdateScore from './hooks/useUpdateScore';
+import { Player } from '../types';
 import './App.css';
 
+const INITIAL_STATE_BOARD = Array(9).fill({
+	name: '',
+	icon: '',
+	score: 0
+})
+
 function App() {
-	const [board, setBoard] = useState(Array(9).fill(null));
-	const [winner, setWinner] = useState(null);
+	const [board, setBoard] = useState<Player[]>(INITIAL_STATE_BOARD);
+	const [winner, setWinner] = useState<Player>({
+		name: '',
+		icon: '',
+		score: 0
+	});
 	const [play, setPlay] = useState(false);
 	const [array, setArray] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-	const [turn, setTurn] = useState(null);
+	const [turn, setTurn] = useState<Player>({ name: '', icon: '', score: 0 });
 
 	const { player, player2, quitPlayerGame, updatePlayer, updatePlayer2 } =
 		useUpdatePlayer();
@@ -21,7 +32,7 @@ function App() {
 	const { scoreX, scoreO, scoreTies, resetScore } = useUpdateScore(winner);
 
 	useEffect(() => {
-		if (player2 && player2.icon === turn.icon && player2.name === 'CPU') {
+		if (player2.icon !== '' && player2.name === "CPU") {
 			const index = array[Math.floor(Math.random() * array.length)];
 			const newArray = array.filter(i => i !== index);
 			setArray(newArray);
@@ -29,10 +40,11 @@ function App() {
 		}
 	}, [turn]);
 
-	const updateBoard = index => {
-		if (board[index] || winner) return;
+	const updateBoard = (index: number) => {
 
-		if (winner !== null) return;
+		if (board[index].icon !== '' || winner.icon != '') return;
+
+		if (winner.icon !== '') return;
 
 		const newArray = array.filter(i => i !== index);
 		setArray(newArray);
@@ -41,30 +53,39 @@ function App() {
 		newBoard[index] = turn;
 		setBoard(newBoard);
 
-		if (winner === null) {
-			if (player2 !== null) {
+		if (winner.icon === '') {
+			if (player2.icon !== '') {
 				const newTurn = turn.icon === player.icon ? player2 : player;
 				setTurn(newTurn);
 			}
 		}
 
 		const newWinner = checkWinner(newBoard);
-		if (newWinner) {
+
+		if (newWinner.name !== '') {
 			setWinner(newWinner);
 		} else if (checkEndGame(newBoard)) {
-			setWinner(false);
+			setWinner({
+				name: 'Empate',
+				icon: '',
+				score: 0
+			});
 		}
 	};
 
 	const resetGame = () => {
-		setBoard(Array(9).fill(null));
+		setBoard(INITIAL_STATE_BOARD);
 
 		if (player.icon === TURNS.X) {
 			setTurn(player);
 		} else {
 			setTurn(player2);
 		}
-		setWinner(null);
+		setWinner({
+			name: '',
+			icon: '',
+			score: 0
+		});
 		setArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 	};
 
@@ -73,10 +94,10 @@ function App() {
 		quitPlayerGame();
 		resetScore();
 		setPlay(false);
-		setTurn(null);
+		setTurn({ name: '', icon: '', score: 0 });
 	};
 
-	const handleSelected = pick => {
+	const handleSelected = (pick: string) => {
 		const player = {
 			name: 'YOU',
 			icon: pick,
