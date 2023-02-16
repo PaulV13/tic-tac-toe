@@ -82,8 +82,10 @@ function App() {
 			score: 0
 		});
 		if (player.icon === TURNS.X) {
+			setArray([0, 1, 2, 3, 4, 5, 6, 7, 8])
 			setTurn(player);
 		} else {
+			setArray([0, 1, 2, 3, 4, 5, 6, 7, 8])
 			setTurn(player2);
 		}
 	};
