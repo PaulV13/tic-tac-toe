@@ -33,15 +33,18 @@ function App() {
 
 	useEffect(() => {
 		if (player2.name === "CPU" && player2.icon === turn.icon) {
-			const index = array[Math.floor(Math.random() * array.length)];
-			const newArray = array.filter(i => i !== index);
-			setArray(newArray);
-			updateBoard(index);
+			moveCpu();
 		}
-	}, [turn]);
+	}, [turn, winner]);
+
+	const moveCpu = () => {
+		const index = array[Math.floor(Math.random() * array.length)];
+		const newArray = array.filter(i => i !== index);
+		setArray(newArray);
+		updateBoard(index);
+	}
 
 	const updateBoard = (index: number) => {
-
 		if (winner.name !== '' || board[index].name !== '') return;
 
 		const newArray = array.filter(i => i !== index);
@@ -60,29 +63,29 @@ function App() {
 
 		if (newWinner.name !== '') {
 			setWinner(newWinner);
+			setArray([0, 1, 2, 3, 4, 5, 6, 7, 8])
 		} else if (checkEndGame(newBoard)) {
 			setWinner({
 				name: 'Empate',
 				icon: '',
 				score: 0
 			});
+			setArray([0, 1, 2, 3, 4, 5, 6, 7, 8])
 		}
 	};
 
 	const resetGame = () => {
 		setBoard(INITIAL_STATE_BOARD);
-
-		if (player.icon === TURNS.X) {
-			setTurn(player);
-		} else {
-			setTurn(player2);
-		}
 		setWinner({
 			name: '',
 			icon: '',
 			score: 0
 		});
-		setArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+		if (player.icon === TURNS.X) {
+			setTurn(player);
+		} else {
+			setTurn(player2);
+		}
 	};
 
 	const quitGame = () => {
