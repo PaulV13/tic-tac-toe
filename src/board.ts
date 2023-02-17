@@ -5,13 +5,11 @@ export const checkWinner = (boardCheck: (Player | null)[]) => {
 	for (const combo of WINNER_COMBOS) {
 		const [a, b, c] = combo;
 		if (
-			boardCheck[a] !== null &&
-			boardCheck[b] !== null &&
-			boardCheck[c] !== null
+			boardCheck[a] !== null
 		) {
 			if (
-				boardCheck[a]!.icon === boardCheck[b]!.icon &&
-				boardCheck[a]!.icon === boardCheck[c]!.icon
+				boardCheck[a] === boardCheck[b] &&
+				boardCheck[a] === boardCheck[c]
 			) {
 				return boardCheck[a];
 			}
