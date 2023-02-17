@@ -2,18 +2,17 @@ import { Player } from '../../../types';
 import './WinnerModal.css';
 
 interface Props {
-	winner: Player
-	resetGame: () => void
-	quitGame: () => void
+	winner: Player | null;
+	resetGame: () => void;
+	quitGame: () => void;
 }
 
 export function WinnerModal({ winner, resetGame, quitGame }: Props) {
-	
-	if (winner.name === '') return null;
+	if (winner === null) return null;
 	return (
 		<div className='container_winner'>
 			<section className='winner'>
-				{winner.name === 'Empate' ? (
+				{winner && winner.name === 'Empate' ? (
 					<h2>TIE</h2>
 				) : (
 					<div className='winner_text'>
@@ -21,13 +20,12 @@ export function WinnerModal({ winner, resetGame, quitGame }: Props) {
 						<h1>WON!</h1>
 					</div>
 				)}
-				{winner.icon !== '' && (
+				{winner && (
 					<section>
 						<img src={winner.icon}></img>
 						<h1>TAKES THE ROUND</h1>
 					</section>
 				)}
-
 				<footer>
 					<button className='quit_btn' onClick={quitGame}>
 						QUIT
