@@ -14,8 +14,8 @@ const INITIAL_STATE_BOARD = Array(9).fill(null);
 function App() {
 	const [board, setBoard] = useState<(Player | null)[]>(INITIAL_STATE_BOARD);
 	const [winner, setWinner] = useState<Player | null>(null);
-	const [play, setPlay] = useState(false);
-	const [array, setArray] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [indexBoardCPU, setIndexBoardCPU] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 	const [turn, setTurn] = useState<Player | null>(null);
 	const { player, player2, quitPlayerGame, updatePlayer, updatePlayer2 } =
 		useUpdatePlayer();
@@ -27,9 +27,9 @@ function App() {
 
 	const moveCpu = () => {
 		if (turn && turn === player2 && player2.name === 'CPU') {
-			const index = array[Math.floor(Math.random() * array.length)];
-			const newArray = array.filter(i => i !== index);
-			setArray(newArray);
+			const index = indexBoardCPU[Math.floor(Math.random() * indexBoardCPU.length)];
+			const newArray = indexBoardCPU.filter(i => i !== index);
+			setIndexBoardCPU(newArray);
 			updateBoard(index);
 		}
 	};
@@ -37,8 +37,8 @@ function App() {
 	const updateBoard = (index: number) => {
 		if (winner || board[index]) return;
 
-		const newArray = array.filter(i => i !== index);
-		setArray(newArray);
+		const newArray = indexBoardCPU.filter(i => i !== index);
+		setIndexBoardCPU(newArray);
 
 		const newBoard = [...board];
 		newBoard[index] = turn;
@@ -66,7 +66,7 @@ function App() {
 	const resetGame = () => {
 		setBoard(INITIAL_STATE_BOARD);
 		setWinner(null);
-		setArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+		setIndexBoardCPU([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 		if (player && player.icon === TURNS.X) {
 			setTurn(player);
 		} else {
@@ -81,7 +81,7 @@ function App() {
 		resetScore();
 		setWinner(null);
 		setTurn(null);
-		setPlay(false);
+		setIsPlaying(false);
 	};
 
 	const setPlayerPick = (pick: string) => {
@@ -93,46 +93,35 @@ function App() {
 	};
 
 	const setCpuPick = () => {
-		let cpu;
-		if (player && player.icon === TURNS.X) {
-			cpu = {
-				name: 'CPU',
-				icon: TURNS.O,
-			};
-			setTurn(player);
-		} else {
-			cpu = {
-				name: 'CPU',
-				icon: TURNS.X,
-			};
-			setTurn(cpu);
-		}
-		updatePlayer2(cpu);
-		setPlay(true);
+		setPlayer2Pick("CPU")
 	};
 
 	const setSecondPlayerPick = () => {
+		setPlayer2Pick("Player 2")
+	};
+
+	const setPlayer2Pick = (name: string) => {
 		let player2;
 		if (player && player.icon === TURNS.X) {
 			player2 = {
-				name: 'Player 2',
+				name,
 				icon: TURNS.O,
 			};
 			setTurn(player);
 		} else {
 			player2 = {
-				name: 'Player 2',
+				name,
 				icon: TURNS.X,
 			};
 			setTurn(player2);
 		}
 		updatePlayer2(player2);
-		setPlay(true);
-	};
+		setIsPlaying(true);
+	}
 
 	return (
 		<div className='App'>
-			{play === false ? (
+			{isPlaying === false ? (
 				<>
 					<div className='container_icons'>
 						<img src={TURNS.X} />

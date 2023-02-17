@@ -3,14 +3,14 @@ import { TURNS } from '../constants';
 import { Player } from '../../types';
 
 const useUpdatePlayer = () => {
-	const [player, setPlayer] = useState<Player | null>({
+	const [player1, setPlayer1] = useState<Player | null>({
 		name: 'YOU',
 		icon: TURNS.X,
 	});
 	const [player2, setPlayer2] = useState<Player | null>(null);
 
-	const updatePlayer = (player: Player) => {
-		setPlayer(player);
+	const updatePlayer1 = (player: Player) => {
+		setPlayer1(player);
 	};
 
 	const updatePlayer2 = (player2: Player) => {
@@ -18,15 +18,15 @@ const useUpdatePlayer = () => {
 	};
 
 	const quitPlayerGame = () => {
-		setPlayer({ name: 'YOU', icon: TURNS.X });
+		setPlayer1({ name: 'YOU', icon: TURNS.X });
 		setPlayer2(null);
 	};
 
 	return {
-		player,
+		player: player1,
 		player2,
 		quitPlayerGame,
-		updatePlayer,
+		updatePlayer: updatePlayer1,
 		updatePlayer2,
 	};
 };
