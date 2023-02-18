@@ -4,6 +4,7 @@ import { checkWinner, checkEndGame } from './board';
 import { WinnerModal } from './components/Modal/WinnerModal';
 import Score from './components/Score/Score';
 import Board from './components/Board/Board';
+import Button from './components/Button/Button';
 import useUpdatePlayer from './hooks/useUpdatePlayer';
 import useUpdateScore from './hooks/useUpdateScore';
 import { Player } from '../types';
@@ -146,12 +147,12 @@ function App() {
 						<p> REMEMBER X GOES FIRST </p>
 					</div>
 					<div className='container_buttons'>
-						<button className='yellow' onClick={setCpuPick}>
+						<Button className="yellow" onClick={setCpuPick} >
 							NEW GAME (VS CPU)
-						</button>
-						<button className='blue' onClick={setSecondPlayerPick}>
+						</Button>
+						<Button className="blue" onClick={setSecondPlayerPick} >
 							NEW GAME (VS PLAYER 2)
-						</button>
+						</Button>
 					</div>
 				</>
 			) : (

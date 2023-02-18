@@ -1,4 +1,5 @@
 import { Player } from '../../../types';
+import Button from '../Button/Button';
 import './WinnerModal.css';
 
 interface Props {
@@ -27,12 +28,12 @@ export function WinnerModal({ winner, resetGame, quitGame }: Props) {
 					</section>
 				)}
 				<footer>
-					<button className='quit_btn' onClick={quitGame}>
+					<Button className='quit_btn' onClick={quitGame}>
 						QUIT
-					</button>
-					<button className='return_btn' onClick={resetGame}>
+					</Button>
+					<Button className='return_btn' onClick={resetGame}>
 						NEXT ROUND
-					</button>
+					</Button>
 				</footer>
 			</section>
 		</div>
